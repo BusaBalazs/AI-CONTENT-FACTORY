@@ -38,3 +38,16 @@ services:
       - postgres
 
     restart: unless-stopped
+
+  #local LLM
+  ollama:
+      image: ollama/ollama:latest
+      container_name: ollama
+
+      ports:
+        - "11434:11434"
+
+      volumes:
+        - ./data/ollama:/root/.ollama
+
+      restart: unless-stopped

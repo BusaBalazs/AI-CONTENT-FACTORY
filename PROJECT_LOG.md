@@ -2,10 +2,11 @@
 
 ## Project Log
 
-### 2026-07-04
 
 ### ----------------------------------------------------------------------------
 ### ----------------------------------------------------------------------------
+### 2026-07-04
+
 **Step 1 - Install Docker Desktop**
 
 - Install Docker Desktop
@@ -14,6 +15,8 @@
 
 ### ----------------------------------------------------------------------------
 ### ----------------------------------------------------------------------------
+### 2026-07-04
+
 **Step 2 – Docker Prerequisites Fix**
 
 - Diagnosed Docker Desktop startup issue
@@ -28,6 +31,8 @@ Virtualization is now enabled and system is ready for Docker Desktop setup.
 
 ### ----------------------------------------------------------------------------
 ### ----------------------------------------------------------------------------
+### 2026-07-04
+
 **Step 3 – First Docker Service (n8n)**
 
 - Created project directory structure: `C:\AI-Content-Factory`
@@ -86,7 +91,6 @@ The project now follows the standard practice of separating configuration from i
 
 ### ----------------------------------------------------------------------------
 ### ----------------------------------------------------------------------------
-
 ### 2026-07-05
 
 **Step 7 – Migration to Production Compose Structure**
@@ -111,11 +115,40 @@ The project now uses a clean, portable and production-oriented Docker Compose fo
 - This container was blocking new Docker Compose deployment due to name conflict
 
 **Resolution:**
+
 - Removed outdated container manually using `docker rm`
 - Cleaned up unused test container (`hello-world`)
 
 **Result:**
 Docker environment is now clean and ready for Compose-based deployment.
+
+### ----------------------------------------------------------------------------
+### ----------------------------------------------------------------------------
+### 2026-07-05
+
+**Step 9 – PostgreSQL Integration for n8n**
+
+- Added PostgreSQL service to Docker Compose
+- Migrated n8n from default internal storage to PostgreSQL database
+- Configured database connection via environment variables
+- Introduced persistent database storage using bind mounts
+- Added service dependency between n8n and PostgreSQL
+
+**Result:**
+n8n is now running in production-grade configuration using PostgreSQL as its primary database backend.
+
+### ----------------------------------------------------------------------------
+### ----------------------------------------------------------------------------
+### 2026-07-05
+
+**Step 10 – Docker Compose Structure Fix (Ollama Integration)**
+
+- Identified YAML structure issue in Docker Compose configuration
+- Incorrect nesting placed `ollama` service inside `n8n` service block
+- Fixed invalid Compose structure by moving `ollama` to top-level services section
+
+**Result:**
+Docker Compose configuration now properly defines independent services for PostgreSQL, n8n, and Ollama.
 
 ### ----------------------------------------------------------------------------
 ### ----------------------------------------------------------------------------
