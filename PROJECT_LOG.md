@@ -141,14 +141,30 @@ n8n is now running in production-grade configuration using PostgreSQL as its pri
 ### ----------------------------------------------------------------------------
 ### 2026-07-05
 
-**Step 10 – Docker Compose Structure Fix (Ollama Integration)**
+**Step 10 – Ollama Integration (Local AI Layer)**
 
-- Identified YAML structure issue in Docker Compose configuration
-- Incorrect nesting placed `ollama` service inside `n8n` service block
-- Fixed invalid Compose structure by moving `ollama` to top-level services section
+- Added Ollama service to Docker Compose
+- Exposed local LLM API on port 11434
+- Configured persistent model storage using bind mount
+- Pulled first local model (llama3.2)
+- Verified model execution inside container
 
 **Result:**
-Docker Compose configuration now properly defines independent services for PostgreSQL, n8n, and Ollama.
+Local AI inference layer is now available for future n8n automation workflows.
+
+### ----------------------------------------------------------------------------
+### ----------------------------------------------------------------------------
+### 2026-07-05
+
+**Step 12 – Open WebUI Integration**
+
+- Added Open WebUI service to Docker Compose
+- Connected WebUI to local Ollama instance via internal Docker network
+- Exposed web interface on port 3000
+- Configured persistent storage for WebUI settings and chat history
+
+**Result:**
+A browser-based AI chat interface is now available for interacting with local LLM models.
 
 ### ----------------------------------------------------------------------------
 ### ----------------------------------------------------------------------------
