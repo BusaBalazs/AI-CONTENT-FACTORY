@@ -100,3 +100,22 @@ The project now follows the standard practice of separating configuration from i
 **Result:**
 The project now uses a clean, portable and production-oriented Docker Compose foundation.
 
+### ----------------------------------------------------------------------------
+### ----------------------------------------------------------------------------
+### 2026-07-05
+
+**Step 8 – Container Cleanup for Compose Migration**
+
+- Identified leftover Docker containers from previous setup
+- Found inactive `n8n` container in exited state
+- This container was blocking new Docker Compose deployment due to name conflict
+
+**Resolution:**
+- Removed outdated container manually using `docker rm`
+- Cleaned up unused test container (`hello-world`)
+
+**Result:**
+Docker environment is now clean and ready for Compose-based deployment.
+
+### ----------------------------------------------------------------------------
+### ----------------------------------------------------------------------------
