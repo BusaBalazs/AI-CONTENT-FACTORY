@@ -1,0 +1,190 @@
+{
+  "name": "Content Source - RSS Ingestion",
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "37ddece1-9484-47c1-af0b-913d1cdddcb7",
+              "name": "title",
+              "value": "={{$json[\"title\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "a0857588-90e2-42b3-84ad-edde758a26c3",
+              "name": "link",
+              "value": "={{$json.link}}",
+              "type": "string"
+            },
+            {
+              "id": "6fc3e89f-ea82-4709-9974-725e25b717d9",
+              "name": "source",
+              "value": "hackernews",
+              "type": "string"
+            },
+            {
+              "id": "cc76c9e0-77c8-408f-b3da-4d821febec40",
+              "name": "published",
+              "value": "={{$json.pubDate}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        80,
+        32
+      ],
+      "id": "307499ca-9c8f-4fae-bfa6-090247f1a566",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "url": "https://hnrss.org/frontpage",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        -112,
+        32
+      ],
+      "id": "c3c06138-4c98-450a-8c87-08da274b2297",
+      "name": "RSS Read",
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are an experienced technology content creator.\n\nYour task is to transform the provided news into a professional LinkedIn post.\n\nRequirements:\n\n* Start with a strong attention-grabbing opening.\n* Explain why the news is important.\n* Keep the tone professional but engaging.\n* Write between 120 and 180 words.\n* Finish with a question that encourages discussion.\n* Add 3–5 relevant hashtags.\n\nReturn only the LinkedIn post as plain text.\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        544,
+        32
+      ],
+      "id": "9778ac06-62f3-4993-a514-b25902b3563f",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        544,
+        272
+      ],
+      "id": "4b22b8b0-ecd1-41c1-a9ef-5317e427f52f",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "YU4GWjcSV4hRAkH0",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        256,
+        32
+      ],
+      "id": "b85aaaf1-0d6a-4785-b732-4dc8ebecdf1a",
+      "name": "Limit"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -368,
+        32
+      ],
+      "id": "0b88a30e-ff7a-4066-9a2d-05b4617bc26c",
+      "name": "When clicking ‘Execute workflow’"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "RSS Read": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "RSS Read",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "da4e75f1-7c24-452c-b3e8-75d44ec3bad3",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "04c1d43fa159b3c04603de8414865741c6cacc70a6be6f4b4aefe846c9fd6120"
+  },
+  "nodeGroups": [],
+  "id": "5rj3wOjthKQLl7Nk",
+  "tags": []
+}
