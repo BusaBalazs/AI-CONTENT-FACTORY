@@ -237,5 +237,127 @@ The system now uses an AI Agent as the core reasoning engine for transforming RS
 
 **Result:**
 The platform can now generate a draft LinkedIn post from a live RSS article with a single manual execution.
+
+### ----------------------------------------------------------------------------
+### ----------------------------------------------------------------------------
+### 2026-07-06
+
+**Step 18 – Workflow Versioning**
+
+- Exported the first production workflow from n8n
+- Added workflow documentation
+- Committed the workflow to Git
+- Established workflow versioning process
+
+**Result:**
+The first reusable workflow is now stored as source code and fully version controlled.
+
+### ----------------------------------------------------------------------------
+### ----------------------------------------------------------------------------
+## 2026-07-18
+
+**Step 19 – Project Direction Update**
+
+The project scope has been refined from an AI social post generator into a reusable AI Content Platform.
+
+Architectural Decisions
+Changed the primary goal from generating LinkedIn posts to building an AI-powered news aggregation platform.
+Introduced the concept of Stories instead of Articles as the main content entity.
+Adopted a reusable content pipeline where every AI-generated artifact is permanently stored.
+Decided to support multiple content categories instead of technology news only.
+Confirmed bilingual content support (Hungarian and English).
+React (Vite) + Firebase remain the selected technology stack for the website.
+Content Strategy
+
+*Every published story will contain:*
+
+30-second summary (TL;DR)
+What happened?
+Why is it important?
+Who is affected?
+Should the reader open the original article?
+Link to the original source
+
+The platform is designed to help readers quickly understand the essential information while always providing access to the original publication.
+
+*Data Strategy*
+
+Firestore will store complete content assets instead of only the final published article.
+
+Each Story will become the single source of truth for:
+
+Original source information
+AI relevance evaluation
+Structured summaries
+Hungarian version
+English version
+Future social media content
+Publishing status
+Additional reusable AI artifacts
+Core Principle
+
+The AI never generates disposable content. Every generated artifact is stored and can be reused later.
+
+This principle will guide the architecture of the entire platform and minimize repeated AI processing in future workflows.
+
+**Result:**
+
+The project has evolved from an AI Post Factory into a scalable AI Content Platform with reusable structured content as its foundation.
+
+### ----------------------------------------------------------------------------
+### ----------------------------------------------------------------------------
+### 2026-07-20
+
+**Step 20 – Web Content Extraction & Parsing**
+
+- Configured linkedom and Readability parsing in n8n for structured content extraction
+- Extracted key article metadata (title, byline, clean_text, excerpt, siteName) from multiple news portals
+- Validated JSON payload structure and verified text cleaning pipeline
+- Resolved HTML string parsing and sentence boundary formatting edge cases
+
+**Result:**
+The web scraping workflow produces valid, structured JSON output ready for downstream processing and automated summaries.
+
+### ----------------------------------------------------------------------------
+### ----------------------------------------------------------------------------
+
+
+
+
+
+### ----------------------------------------------------------------------------
+*todo:*
+### ----------------------------------------------------------------------------
+### ----------------------------------------------------------------------------
+### ----------------------------------------------------------------------------
+
+## knowledge layer
+A knowledge dokumentum például így nézhet ki: 
+{
+  "mainTopic": "",
+  "entities": [
+    "..."
+  ],
+  "facts": [
+    "..."
+  ],
+  "numbers": [
+    "..."
+  ],
+  "timeline": [
+    "..."
+  ],
+  "keywords": [
+    "..."
+  ]
+}
+
+## duplicate filter
+AI Relevance Filter
+        ↓
+Duplicate Checker
+        ↓
+Story Composer
+### ----------------------------------------------------------------------------
 ### ----------------------------------------------------------------------------
 ### ----------------------------------------------------------------------------

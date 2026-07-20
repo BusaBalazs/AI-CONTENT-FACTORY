@@ -22,6 +22,7 @@ services:
 
     environment:
       TZ: ${TZ}
+      NODE_FUNCTION_ALLOW_EXTERNAL: "@mozilla/readability,linkedom"
 
       # DATABASE CONFIG
       DB_TYPE: postgresdb
@@ -70,3 +71,5 @@ services:
       - ollama
 
     restart: unless-stopped
+
+
